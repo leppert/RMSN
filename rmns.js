@@ -19,7 +19,13 @@ var everyone = nowjs.initialize(app);
 //###########//
 // -- GET -- //
 //###########//
-var redirect_url = process.env.REDIRECT_URL || false;
+var redirect_url = false;
+if(process.env.REDIRECT_URL){
+  redirect_url = process.env.REDIRECT_URL;
+  if(redirect_url.substring(0,4).toLowerCase() != 'http'){
+    redirect_url = 'http://'+redirect_url;
+  }
+}
 app.get('/', function(request, response){
   if(redirect_url){
     response.redirect(redirect_url);
