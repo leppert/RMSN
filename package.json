@@ -8,6 +8,7 @@
     "url": "git://github.com/leppert/RMSN.git"
   },
   "dependencies": {
+    "express": "2.2.0",
     "now": ">= 0.7.5"
   }
 }
