@@ -30,6 +30,9 @@ opting out of that connection option](https://twitter.com/#!/NowJsTeam/status/11
 * Setup your NODE_ENV variable for Express `heroku config:add NODE_ENV=production`
 * Push the code to master `git push heroku master`
 
+Additional instructions for running Node.js applications on Heroku can
+be [found here](http://devcenter.heroku.com/articles/node-js).
+
 RMSN
 ----
 RMSN, the acronym, is an homage to [Shipping News](http://www.shippingnews.org),
