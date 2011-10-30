@@ -19,10 +19,15 @@ var everyone = nowjs.initialize(app);
 //###########//
 // -- GET -- //
 //###########//
+var redirect_url = process.env.REDIRECT_URL || false;
 app.get('/', function(request, response){
-  fs.readFile(__dirname + '/index.html', 'utf8', function(err, text){
-    response.send(text);
-  });
+  if(redirect_url){
+    response.redirect(redirect_url);
+  } else {
+    fs.readFile(__dirname + '/index.html', 'utf8', function(err, text){
+      response.send(text);
+    });
+  }
 });
 
 //############//

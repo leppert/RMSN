@@ -6,12 +6,18 @@ specifically on [Heroku](http://www.heroku.com) but generally anywhere.
 
 Components
 ----------
-
 ###Application Server
 Built using [Now.js](http://nowjs.com) on top of [Node.js](http://nodejs.org)
 
 ###Gem
 Shamelessly stolen from [the Pusher gem](https://github.com/pusher/pusher-gem)
+
+Configuration
+-------------
+There are two environment variables that need to be set:
+
+* `SECRET` - the token that will be used to validate your requests
+* `REDIRECT_URL` - the url that GET requests will be redirected to
 
 Deploying to Heroku
 -----------------
