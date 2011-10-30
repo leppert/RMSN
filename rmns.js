@@ -26,7 +26,7 @@ if(process.env.REDIRECT_URL){
     redirect_url = 'http://'+redirect_url;
   }
 }
-app.get('/', function(request, response){
+app.get('*', function(request, response){
   if(redirect_url){
     response.redirect(redirect_url);
   } else {
