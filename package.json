@@ -1,0 +1,13 @@
+{
+  "author": "Greg Leppert",
+  "name": "RMNS",
+  "version": "0.0.1",
+  "description": "RMNS: A drop-in replacement for Pusher",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/leppert/RMSN.git"
+  },
+  "dependencies": {
+    "now": ">= 0.7.5"
+  }
+}
