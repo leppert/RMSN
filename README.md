@@ -20,6 +20,10 @@ opting out of that connection option](https://twitter.com/#!/NowJsTeam/status/11
 
 `nowjs.initialize('httpServer', {socketio: {transports:['xhr-polling','jsonp-polling']}});`
 
+* Create your Heroku app `heroku create --stack cedar`
+* Setup your NODE_ENV variable for Express `heroku config:add NODE_ENV=production`
+* Push the code to master `git push heroku master`
+
 RMSN
 ----
 RMSN, the acronym, is an homage to [Shipping News](http://www.shippingnews.org),
