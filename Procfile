@@ -1,1 +1,1 @@
-web: node rmns.js
+web: node server.js

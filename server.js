@@ -19,6 +19,12 @@ var everyone = nowjs.initialize(app);
 //###########//
 // -- GET -- //
 //###########//
+
+
+app.get('/rmsn.js', function(request, response){
+  response.sendfile(__dirname + '/client.js');
+});
+
 var redirect_url = false;
 if(process.env.REDIRECT_URL){
   redirect_url = process.env.REDIRECT_URL;
@@ -30,16 +36,16 @@ app.get('*', function(request, response){
   if(redirect_url){
     response.redirect(redirect_url);
   } else {
-    fs.readFile(__dirname + '/index.html', 'utf8', function(err, text){
-      response.send(text);
-    });
+    response.sendfile(__dirname + '/index.html');
   }
 });
 
 //############//
 // -- POST -- //
 //############//
-app.post('/', function(request, response){
+// Modeled after: http://pusher.com/docs/rest_api
+app.post('apps/:app_id/channels/:channel_name/events', function(request, response){
+  // request.params.app_id
   everyone.now.receiveMessage(request.body.event_name, request.body.message);
   response.send('true');
 });
