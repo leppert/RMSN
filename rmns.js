@@ -6,11 +6,9 @@ var fs      = require('fs'),
 //###############//
 // -- Express -- //
 //###############//
-var app = express.createServer(express.logger());
-// Parse the POST data when it comes in
-app.use(express.bodyParser());
-// Start listening for requests
-var port = process.env.PORT || 3000;
+var app  = express.createServer(express.logger()),
+    port = process.env.PORT || 3000;
+app.use(express.bodyParser()); // Parse the POST data when it comes in
 app.listen(port, function(){ console.log("Listening on " + port); });
 
 //##############//
@@ -18,15 +16,11 @@ app.listen(port, function(){ console.log("Listening on " + port); });
 //##############//
 var everyone = nowjs.initialize(app);
 
-everyone.now.distributeMessage = function(message){
-  everyone.now.receiveMessage(this.now.name, message);
-};
-
 //###########//
 // -- GET -- //
 //###########//
-app.get('/', function(request, response) {
-  fs.readFile(__dirname + '/helloworld.html', 'utf8', function(err, text){
+app.get('/', function(request, response){
+  fs.readFile(__dirname + '/index.html', 'utf8', function(err, text){
     response.send(text);
   });
 });
@@ -35,6 +29,6 @@ app.get('/', function(request, response) {
 // -- POST -- //
 //############//
 app.post('/', function(request, response){
-  everyone.now.receiveMessage('test', request.body.message);
+  everyone.now.receiveMessage(request.body.event_name, request.body.message);
   response.send('true');
 });

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>RMSN - Reading Message Server</title>
+<style type="text/css">
+  body {
+    font-family:'Helvetica Neue', helvetica, arial, sans-serif;
+    padding: 30px 60px;
+  }
+</style>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+<script src="/nowjs/now.js"></script>
+<script>
+$(document).ready(function(){
+
+  now.receiveMessage = function(event_name, message){
+    $('#events').append("<br>" + event_name + ": " + message);
+  }
+
+  $("#send-button").click(function(){
+    $.post('/', {
+      event_name: $('#event_name').val(),
+      message: $('#message').val()
+    });
+    $(':text').val('');
+  });
+
+});
+</script>
+</head>
+<body>
+  <h1>RMSN</h1>
+  <h2><a href="https://github.com/leppert/RMSN">Reading Message
+      Server</a> Test Page</h2>
+  <form>
+    <input type="text" id="event_name" placeholder='event_name'>
+    <input type="text" id="message" placeholder='message'>
+    <input type="button" value="Send" id="send-button">
+  </form>
+  <div id="events"></div>
+</body>
+</html>
