@@ -11,6 +11,7 @@
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
 <script src="/nowjs/now.js"></script>
+<script src="http://js.pusherapp.com/1.9/pusher.min.js"></script>
 <script src="/rmsn.js"></script>
 <script>
 now.ready(function(){
@@ -41,8 +42,8 @@ now.ready(function(){
 
   for(i = 0; i < config.channels.length; i++){
     channel = pusher.subscribe(config.channels[i]);
-    channel.bind('new_obj', new_obj);
-    channel.bind('update_obj', update_obj);
+    //channel.bind('new_obj', new_obj);
+    //channel.bind('update_obj', update_obj);
   }
 
 });
