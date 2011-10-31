@@ -27,6 +27,21 @@ $(document).ready(function(){
     $(':text').val('');
   });
 
+  // Pusher code
+  var _pusher = {
+    key:'fjdklafsdjklv',
+    channels:['greg','pieratt','max']
+  };
+
+  var pusher = new Pusher(_pusher.key),
+      channel;
+
+  for(i = 0; i < _pusher.channels.length; i++){
+    channel = pusher.subscribe(_pusher.channels[i]);
+    channel.bind('new_obj', new_obj);
+    channel.bind('update_obj', update_obj);
+  }
+
 });
 </script>
 </head>

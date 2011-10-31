@@ -19,8 +19,6 @@ var everyone = nowjs.initialize(app);
 //###########//
 // -- GET -- //
 //###########//
-
-
 app.get('/rmsn.js', function(req, res){
   res.sendfile(__dirname + '/client.js');
 });
@@ -33,11 +31,8 @@ if(process.env.REDIRECT_URL){
   }
 }
 app.get('*', function(req, res){
-  if(redirect_url){
-    res.redirect(redirect_url);
-  } else {
-    res.sendfile(__dirname + '/index.html');
-  }
+  if(redirect_url) res.redirect(redirect_url);
+  else res.sendfile(__dirname + '/index.html');
 });
 
 //############//
