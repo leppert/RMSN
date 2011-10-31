@@ -19,6 +19,14 @@ There are two environment variables that need to be set:
 * `SECRET` - the token that will be used to validate your requests
 * `REDIRECT_URL` - the url that GET requests will be redirected to
 
+now.ready
+---------
+It's important to note that you'll probably need to wrap your code in a
+`now.ready(function(){});` function call. If you're seeing errors like
+`Object has no method 'subscribe'` it's because your code is being executed
+before nowjs has a chance to load and sync up all its methods. Only the
+code that accesses RMSN immediately on page load needs this wrapper.
+
 Deploying to Heroku
 -----------------
 Heroku doesn't allow websockets at the moment so [deploying will require
