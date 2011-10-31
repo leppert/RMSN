@@ -19,6 +19,9 @@ now.ready(function(){
     $('#events').append("<br>" + event_name + ": " + message);
   }
 
+  var new_obj = function(data){ console.log('new_obj', data); },
+      update_obj = function(data){ console.log('update_obj', data); };
+
   $("#send-button").click(function(){
     $.post('/apps/1234/channels/greg/events', {
       event_name: $('#event_name').val(),
@@ -38,8 +41,8 @@ now.ready(function(){
 
   for(i = 0; i < config.channels.length; i++){
     channel = pusher.subscribe(config.channels[i]);
-    //channel.bind('new_obj', new_obj);
-    //channel.bind('update_obj', update_obj);
+    channel.bind('new_obj', new_obj);
+    channel.bind('update_obj', update_obj);
   }
 
 });
