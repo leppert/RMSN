@@ -1,9 +1,12 @@
 /*!
  * RMSN JavaScript Library v0.0.1
- * http://pusherapp.com/
+ * https://github.com/leppert/RMSN
  *
  * Copyright 2011, Greg Leppert
  * Released under the MIT licence.
+ *
+ * Shamelessly modeled after Pusher's API
+ * http://pusher.com
  */
 
 var RMSN = function(app_key, options){
