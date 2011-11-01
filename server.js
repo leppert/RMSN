@@ -16,16 +16,17 @@ app.listen(port, function(){ console.log("Listening on " + port); });
 //##############//
 var everyone = nowjs.initialize(app);
 
-everyone.now.subscribe = function(channel_name){
-  nowjs.getGroup(channel_name).addUser(this.user.clientId);
-  console.log('User added to channel', this.user.clientId, channel_name);
-}
-
-everyone.now.unsubscribe = function(channel_name){
-  nowjs.getGroup(channel_name).removeUser(this.user.clientId);
-  console.log('User removed from channel', this.user.clientId, channel_name);
-  // this.now.channels //remove channel from list here
-}
+everyone.now.RMSN = {
+  subscribe: function(channel_name){
+    nowjs.getGroup(channel_name).addUser(this.user.clientId);
+    console.log('User added to channel', this.user.clientId, channel_name);
+  },
+  unsubscribe: function(channel_name){
+    nowjs.getGroup(channel_name).removeUser(this.user.clientId);
+    console.log('User removed from channel', this.user.clientId, channel_name);
+    // this.now.channels //remove channel from list here
+  }
+};
 
 //###########//
 // -- GET -- //
@@ -51,6 +52,6 @@ app.get('*', function(req, res){
 //############//
 // Modeled after: http://pusher.com/docs/rest_api
 app.post('/apps/:app_id/channels/:channel_name/events', function(req, res){
-  nowjs.getGroup(req.params.channel_name).now.receiveMessage(req.body.event_name, req.body.message);
+  nowjs.getGroup(req.params.channel_name).now.rmsn.connection.emit('message', {'event':req.body.event_name, 'data':req.body.data, 'channel':req.params.channel_name});
   res.send('true');
 });

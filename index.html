@@ -14,37 +14,51 @@
 <script src="http://js.pusherapp.com/1.9/pusher.min.js"></script>
 <script src="/rmsn.js"></script>
 <script>
+// Enable pusher logging
+Pusher.log = function(message) {
+  if (window.console && window.console.log) window.console.log(message);
+};
+// Flash fallback logging
+WEB_SOCKET_DEBUG = true;
+
 now.ready(function(){
 
-  now.receiveMessage = function(event_name, message){
-    $('#events').append("<br>" + event_name + ": " + message);
-  }
-
-  var new_obj = function(data){ console.log('new_obj', data); },
-      update_obj = function(data){ console.log('update_obj', data); };
+  var new_obj = function(data){
+    $('#events').append("<br>new_obj: " + data);
+    console.log('new_obj', data);
+  },
+  update_obj = function(data){
+    $('#events').append("<br>update_obj: " + data);
+    console.log('update_obj', data);
+  };
 
   $("#send-button").click(function(){
     $.post('/apps/1234/channels/greg/events', {
       event_name: $('#event_name').val(),
-      message: $('#message').val()
+      data: $('#data').val()
     });
     $(':text').val('');
   });
-
 
   // Pusher code
   var config = {
         key:'fjdklafsdjklv',
         channels:['greg','pieratt','max']
-      },
-      pusher = new Pusher(config.key),
-      channel;
+      };
+      pusher = new Pusher(config.key);
+      var channel;
 
   for(i = 0; i < config.channels.length; i++){
     channel = pusher.subscribe(config.channels[i]);
-    //channel.bind('new_obj', new_obj);
-    //channel.bind('update_obj', update_obj);
+    channel.bind('new_obj', new_obj);
+    channel.bind('update_obj', update_obj);
   }
+
+  now.rmsn = {
+    connection: {
+      emit: function(event_name, data){ pusher.connection.emit(event_name, data); }
+    }
+  };
 
 });
 </script>
@@ -53,8 +67,8 @@ now.ready(function(){
   <h1>RMSN</h1>
   <h2><a href="https://github.com/leppert/RMSN">Reading Message Server</a> Test Page</h2>
   <form>
-    <input type="text" id="event_name" placeholder='event_name'>
-    <input type="text" id="message" placeholder='message'>
+    <input type="text" id="event_name" placeholder='event_name: new_obj | update_obj'>
+    <input type="text" id="data" placeholder='data'>
     <input type="button" value="Send" id="send-button">
   </form>
   <div id="events"></div>
