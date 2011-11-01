@@ -44,21 +44,15 @@ now.ready(function(){
   var config = {
         key:'fjdklafsdjklv',
         channels:['greg','pieratt','max']
-      };
-      pusher = new Pusher(config.key);
-      var channel;
+      },
+      pusher = new Pusher(config.key),
+      channel;
 
   for(i = 0; i < config.channels.length; i++){
     channel = pusher.subscribe(config.channels[i]);
     channel.bind('new_obj', new_obj);
     channel.bind('update_obj', update_obj);
   }
-
-  now.rmsn = {
-    connection: {
-      emit: function(event_name, data){ pusher.connection.emit(event_name, data); }
-    }
-  };
 
 });
 </script>

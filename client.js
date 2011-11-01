@@ -15,8 +15,12 @@ var RMSN = Pusher; //Alias RMSN to Pusher
 now.ready(function(){
 
   RMSN.prototype.connect = function(){
-    //this function intentionally left blank to prevent connection
-    // TODO - create now.connections to track all connections
+    self = this;
+    now.rmsn = {
+      connection: {
+        emit: function(event_name, data){ self.connection.emit(event_name, data); }
+      }
+    };
   };
 
   RMSN.prototype.subscribe = function(channel_name){
