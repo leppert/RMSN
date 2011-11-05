@@ -53,6 +53,6 @@ app.get('*', function(req, res){
 //############//
 // Modeled after: http://pusher.com/docs/rest_api
 app.post('/apps/:app_id/channels/:channel_name/events', function(req, res){
-  nowjs.getGroup(req.params.channel_name).now.rmsn.connection.emit('message', {'event':req.body.event_name, 'data':req.body.data, 'channel':req.params.channel_name});
+  nowjs.getGroup(req.params.channel_name).now.rmsn.connection.emit('message', {'event':req.query.name, 'data':req.body, 'channel':req.params.channel_name});
   res.send('true');
 });
