@@ -18,6 +18,8 @@ There are two environment variables that need to be set:
 
 * `SECRET` - the token that will be used to validate your requests
 * `REDIRECT_URL` - the url that GET requests will be redirected to
+* `SOCKETS_OFF` true (default) | false - turn off websockets as a
+  transport option
 
 now.ready();
 ------------
@@ -30,9 +32,9 @@ code that accesses RMSN immediately on page load needs this wrapper.
 Deploying to Heroku
 -----------------
 Heroku doesn't allow websockets at the moment so [deploying will require
-opting out of that connection option](https://twitter.com/#!/NowJsTeam/status/115861105032708096) using the following command:
+opting out of that connection option](https://twitter.com/#!/NowJsTeam/status/115861105032708096) by setting SOCKETS_OFF to true:
 
-`nowjs.initialize('httpServer', {socketio: {transports:['xhr-polling','jsonp-polling']}});`
+`heroku config:add SOCKETS_OFF=true`
 
 * Create your Heroku app `heroku create --stack cedar`
 * Setup your NODE_ENV variable for Express `heroku config:add NODE_ENV=production`
