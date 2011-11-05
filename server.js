@@ -32,6 +32,8 @@ everyone.now.RMSN = {
 //###########//
 // -- GET -- //
 //###########//
+// TODO - account for channel stats requests. These follow the same URL
+// structure as the event publishing POST requests but use GET instead
 app.get('/rmsn.js', function(req, res){
   res.sendfile(__dirname + '/client.js');
 });
