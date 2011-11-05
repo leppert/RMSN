@@ -28,6 +28,7 @@ Publisher APIs
 ###Ruby Gem
 RMSN works with the standard [Pusher Gem](https://github.com/pusher/pusher-gem),
 just follow these simple steps:
+
 * Install the gem using `gem install pusher` or add it to your `Gemfile`
   with `gem 'pusher'`
 * Configure the gem using the [url method](https://github.com/pusher/pusher-gem/blob/master/lib/pusher.rb#L50)
