@@ -26,7 +26,6 @@ everyone.now.RMSN = {
   unsubscribe: function(channel_name){
     nowjs.getGroup(channel_name).removeUser(this.user.clientId);
     console.log('User removed from channel', this.user.clientId, channel_name);
-    // this.now.channels //remove channel from list here
   }
 };
 
