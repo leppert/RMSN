@@ -3,17 +3,10 @@ Reading Message Server (RMSN)
 Built for and currently powering [Reading.am](http://reading.am).
 Intended as a drop-in replacement for [Pusher](http://pusher.com),
 specifically on [Heroku](http://www.heroku.com) but generally anywhere.
+Powered by [now.js](http://nowjs.com) on top of [node.js](http://nodejs.org)
 
-Components
-----------
-###Application Server
-Built using [Now.js](http://nowjs.com) on top of [Node.js](http://nodejs.org)
-
-###Gem
-Shamelessly stolen from [the Pusher gem](https://github.com/pusher/pusher-gem)
-
-Configuration
--------------
+Application Server
+------------------
 There are two environment variables that need to be set:
 
 * `SECRET` - the token that will be used to validate your requests
@@ -21,13 +14,29 @@ There are two environment variables that need to be set:
 * `SOCKETS_OFF` true (default) | false - turn off websockets as a
   transport option
 
-now.ready();
-------------
+Client API
+----------
+###now.ready();
 It's important to note that you'll probably need to wrap your code in a
 `now.ready(function(){});` function call. If you're seeing errors like
 `Object has no method 'subscribe'` it's because your code is being executed
 before nowjs has a chance to load and sync up all its methods. Only the
 code that accesses RMSN immediately on page load needs this wrapper.
+
+Publisher APIs
+--------------
+###Ruby Gem
+RMSN works with the standard [Pusher Gem](https://github.com/pusher/pusher-gem),
+just follow these simple steps:
+* Install the gem using `gem install pusher` or add it to your `Gemfile`
+  with `gem 'pusher'`
+* Configure the gem using the [url method](https://github.com/pusher/pusher-gem/blob/master/lib/pusher.rb#L50)
+  with the scheme `http://KEY:SECRET@example.com/apps/APP_ID`.
+  An example configuration in `config/environments/development.rb` of a
+  Rails application might look like this: `Pusher.url = 'http://123qweasd1123qweasd1:098poilkj0098poilkj0@rmsn.example.com/apps/1234'`
+* If you're using Heroku, be sure to remove the Pusher add-on, otherwise
+  your configuration will more than likely be overwritten by the add-on
+  when you deploy to production.
 
 Deploying to Heroku
 -----------------
