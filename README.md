@@ -32,10 +32,11 @@ just follow these simple steps:
 * Install the gem using `gem install pusher` or add it to your `Gemfile`
   with `gem 'pusher'`
 * Configure the gem using the [url method](https://github.com/pusher/pusher-gem/blob/master/lib/pusher.rb#L50)
-  with the scheme `http://KEY:SECRET@example.com/apps/APP_ID`.
+  with the scheme `http://KEY:SECRET@example.com/apps/APP_ID`.  
   An example configuration in `config/environments/development.rb` of a
-  Rails application might look like this: `Pusher.url = 'http://123qweasd1123qweasd1:098poilkj0098poilkj0@rmsn.example.com/apps/1234'`
-* If you're using Heroku, be sure to remove the Pusher add-on, otherwise
+  Rails application might look like this:  
+  `Pusher.url = 'http://123qweasd1123qweasd1:098poilkj0098poilkj0@rmsn.example.com/apps/1234'`
+* If you're using Heroku, make sure to remove the Pusher add-on, otherwise
   your configuration will more than likely be overwritten by the add-on
   when you deploy to production.
 
