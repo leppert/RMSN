@@ -9,51 +9,45 @@
   }
 </style>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 <script src="/nowjs/now.js"></script>
 <script src="http://js.pusherapp.com/1.9/pusher.min.js"></script>
 <script src="/rmsn.js"></script>
 <script>
 // Enable pusher logging
-Pusher.log = function(message) {
-  if (window.console && window.console.log) window.console.log(message);
-};
+Pusher.log = function(message){ if(window.console && window.console.log) window.console.log(message); };
 // Flash fallback logging
 WEB_SOCKET_DEBUG = true;
 
 now.ready(function(){
+  var pusher    = new Pusher('dummy_key_here'),
+      channels  = ['channel_one','channel_two','channel_three'], channel,
+      events    = ['event_one','event_two','event_three'],
+      $channels = $('#channels'),
+      $events   = $('#events'),
+      print = function(channel, event_name, data){
+        $('#results').append('<br>'+channel+' : '+event_name+' : '+data);
+        console.log(channel, event_name, data);
+      };
 
-  var new_obj = function(data){
-    $('#events').append("<br>new_obj: " + data);
-    console.log('new_obj', data);
-  },
-  update_obj = function(data){
-    $('#events').append("<br>update_obj: " + data);
-    console.log('update_obj', data);
-  };
+  $.each(channels, function(K, V){
+    $channels.append('<option value="'+V+'">'+V+'</option>');
+    channel = pusher.subscribe(V);
+    $.each(events, function(k, v){
+      channel.bind(v, function(data){ print(V, v, data); });
+    });
+  });
+  $.each(events, function(k, v){
+    $events.append('<option value="'+v+'">'+v+'</option>');
+  });
 
   $("#send-button").click(function(){
-    $.post('/apps/1234/channels/greg/events', {
-      event_name: $('#event_name').val(),
+    $.post('/apps/1234/channels/'+$channels.val()+'/events', {
+      event_name: $events.val(),
       data: $('#data').val()
     });
     $(':text').val('');
   });
-
-  // Pusher code
-  var config = {
-        key:'fjdklafsdjklv',
-        channels:['greg','pieratt','max']
-      },
-      pusher = new Pusher(config.key),
-      channel;
-
-  for(i = 0; i < config.channels.length; i++){
-    channel = pusher.subscribe(config.channels[i]);
-    channel.bind('new_obj', new_obj);
-    channel.bind('update_obj', update_obj);
-  }
-
 });
 </script>
 </head>
@@ -61,10 +55,11 @@ now.ready(function(){
   <h1>RMSN</h1>
   <h2><a href="https://github.com/leppert/RMSN">Reading Message Server</a> Test Page</h2>
   <form>
-    <input type="text" id="event_name" placeholder='event_name: new_obj | update_obj'>
+    <select id="channels"></select>
+    <select id="events"></select>
     <input type="text" id="data" placeholder='data'>
     <input type="button" value="Send" id="send-button">
   </form>
-  <div id="events"></div>
+  <div id="results"></div>
 </body>
 </html>
