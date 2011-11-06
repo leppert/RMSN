@@ -19,14 +19,14 @@ Application Server
 Credentials are set through environmental variables using the following
 format:
 
-    CRED_APPID_KEY=SECRET
+    KEY_{KEY}={APP_ID}:{SECRET}
 
 For instance, an API credential for app `1234` with key `asdfjkl` and
 secret `qwerty` would look like this:
 
-    CRED_1234_asdfjkl=qwerty
+    KEY_asdfjkl=1234:qwerty
 
-You can set as many credentials as you like.
+You can set as many credentials as you like. Go wild.
 
 Client API
 ----------
@@ -61,7 +61,7 @@ Deploying to Heroku
 * Create your Heroku app `heroku create --stack cedar`
 * [Disable sockets](https://twitter.com/#!/NowJsTeam/status/115861105032708096) by adding `heroku config:add USE_SOCKETS=false`
 * Setup your NODE_ENV variable for Express `heroku config:add NODE_ENV=production`
-* Add a credential, ex. `heroku config:add CRED_1234_asdfjkl=qwerty`
+* Add a credential, ex. `heroku config:add KEY_asdfjkl=1234:qwerty`
   (explained in **Credentials** above)
 * Push the code to master `git push heroku master`
 

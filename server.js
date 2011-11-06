@@ -16,6 +16,14 @@ if(config.redirect_url && redirect_url.substring(0,4).toLowerCase() != 'http'){
 }
 console.log('config', config);
 
+// Helpers
+var get_creds = function(key){
+  var creds = process.env['KEY_'+key];
+  if(!creds) return {};
+  creds = creds.split(':');
+  return {app_id: creds[0], secret: creds[1]};
+};
+
 //###############//
 // -- Express -- //
 //###############//
@@ -62,7 +70,7 @@ app.get('*', function(req, res){
 app.post('/apps/:app_id/channels/:channel_name/events', function(req, res){
   var sig_req = new Signature.Request(req.method, req.url.split('?')[0], req.query),
       token   = sig_req.authenticate(function(key){
-        return new Signature.Token(key, process.env['CRED_'+req.params.app_id+'_'+key]);
+        return new Signature.Token(key, get_creds(key).secret);
       });
   // TODO - account for no one connected
   nowjs.getGroup(req.params.channel_name).now.rmsn.connection.emit('message', {'event':req.query.name, 'data':req.body, 'channel':req.params.channel_name});
