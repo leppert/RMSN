@@ -26,9 +26,9 @@ app.listen(config.port, function(){ console.log("Listening on " + config.port); 
 //##############//
 // -- Now.js -- //
 //##############//
-var everyone = (!process.env.SOCKETS_OFF || process.env.SOCKETS_OFF.toLowerCase() == 'false')
-                  ? nowjs.initialize(app)
-                  : nowjs.initialize(app, {socketio: {transports:['xhr-polling','jsonp-polling']}});
+var everyone = (config.use_sockets)
+                ? nowjs.initialize(app)
+                : nowjs.initialize(app, {socketio: {transports:['xhr-polling','jsonp-polling']}});
 
 everyone.now.RMSN = {
   subscribe: function(channel_name){
