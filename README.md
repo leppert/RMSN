@@ -18,10 +18,14 @@ Application Server
 ###Credentials
 Credentials are set through environmental variables using the following
 format:
+
     CRED_APPID_KEY=SECRET
+
 For instance, an API credential for app `1234` with key `asdfjkl` and
 secret `qwerty` would look like this:
+
     CRED_1234_asdfjkl=qwerty
+
 You can set as many credentials as you like.
 
 Client API
