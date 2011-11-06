@@ -20,7 +20,7 @@ Pusher.log = function(message){ if(window.console && window.console.log) window.
 WEB_SOCKET_DEBUG = true;
 
 now.ready(function(){
-  var config    = {app_id:1234, key:'abcd1234efghi5678'},
+  var config    = {app_id:1234, key:'killerrandomkey', secret:'supersecretphrase'},
       pusher    = new Pusher(config.key),
       channels  = ['channel_one','channel_two','channel_three'], channel,
       events    = ['event_one','event_two','event_three'],
@@ -42,6 +42,8 @@ now.ready(function(){
     $events.append('<option value="'+v+'">'+v+'</option>');
   });
 
+  $('#creds').text('KEY_'+config.key+'='+config.app_id+':'+config.secret);
+
   $("#send-button").click(function(){
     $.post('/apps/'+config.app_id+'/channels/'+$channels.val()+'/events', {
       event_name: $events.val(),
@@ -55,6 +57,7 @@ now.ready(function(){
 <body>
   <h1>RMSN</h1>
   <h2><a href="https://github.com/leppert/RMSN">Reading Message Server</a> Test Page</h2>
+  <h5>For this demo to work, you'll need to add this variable to your environment:<br><code id="creds"></code></h5>
   <form>
     <select id="channels"></select>
     <select id="events"></select>

@@ -26,25 +26,21 @@ now.ready(function(){
 
   RMSN.prototype.subscribe = function(channel_name){
     var channel = this.channels.add(channel_name, this);
-    if(now.RMSN.subscribe(channel_name)){
-      this.send_event('pusher:subscribe', {
-        channel: channel_name,
-        auth: false, //data.auth,
-        channel_data: false //data.channel_data
-      });
-    } else {
-      channel.emit('subscription_error', 'Unable to subscribe to channel: '+channel_name);
-    }
+    now.RMSN.subscribe(channel_name);
+    this.send_event('pusher:subscribe', {
+      channel: channel_name,
+      auth: false, //data.auth,
+      channel_data: false //data.channel_data
+    });
     return channel;
   };
 
   RMSN.prototype.unsubscribe = function(channel_name){
     this.channels.remove(channel_name);
-    if(now.RMSN.unsubscribe(channel_name)){
-      this.send_event('pusher:unsubscribe', {
-        channel: channel_name
-      });
-    }
+    now.RMSN.unsubscribe(channel_name);
+    this.send_event('pusher:unsubscribe', {
+      channel: channel_name
+    });
   };
 
 });
