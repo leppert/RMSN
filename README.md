@@ -61,13 +61,12 @@ just follow these simple steps:
 
 Deploying to Heroku
 -----------------
-Heroku doesn't allow websockets at the moment so [deploying will require
-opting out of that connection option](https://twitter.com/#!/NowJsTeam/status/115861105032708096) by setting USE_SOCKETS to false:
-
-`heroku config:add USE_SOCKETS=false`
 
 * Create your Heroku app `heroku create --stack cedar`
+* [Disable sockets](https://twitter.com/#!/NowJsTeam/status/115861105032708096) `heroku config:add USE_SOCKETS=false`
 * Setup your NODE_ENV variable for Express `heroku config:add NODE_ENV=production`
+* Add a credential, ex. `heroku config:add CRED_1234_asdfjkl=qwerty`
+  (explained in **Credentials** above)
 * Push the code to master `git push heroku master`
 
 Additional instructions for running Node.js applications on Heroku can
