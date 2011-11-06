@@ -11,7 +11,7 @@ Application Server
 
 * `REDIRECT_URL` - When this is set, all non-nowjs GET requests will be
   redirected to the specified URL
-* `USE_SOCKETS` true(default)|false - Disables websockets when set to
+* `USE_SOCKETS` true (default) | false - Disables websockets when set to
   `false`. This is useful when deploying to platforms that decline to
   support sockets, such as Heroku
 
@@ -34,8 +34,8 @@ Client API
 It's important to note that you'll probably need to wrap your code in a
 `now.ready(function(){});` function call. If you're seeing errors like
 `Object has no method 'subscribe'` it's because your code is being executed
-before nowjs has a chance to load and sync up all its methods. Only the
-code that accesses RMSN immediately on page load needs this wrapper.
+before nowjs has had a chance to load. Only code that accesses RMSN
+immediately on page load needs this wrapper.
 
 Publisher APIs
 --------------
@@ -46,11 +46,15 @@ just follow these simple steps:
 * Install the gem using `gem install pusher` or add it to your `Gemfile`
   with `gem 'pusher'`
 * Configure the gem with the [URL method](https://github.com/pusher/pusher-gem/blob/master/lib/pusher.rb#L50)
-  using this URL scheme:  
-  `http://KEY:SECRET@example.com/apps/APP_ID`.  
+  using this URL scheme:
+
+    http://KEY:SECRET@example.com/apps/APP_ID
+
   An example configuration in `config/environments/development.rb` of a
-  Rails application might look like this:  
-  `Pusher.url = 'http://123qweasd1123qweasd1:098poilkj0098poilkj0@rmsn.example.com/apps/1234'`
+  Rails application might look like this:
+
+    Pusher.url = 'http://123qweasd1123qweasd1:098poilkj0098poilkj0@rmsn.example.com/apps/1234'
+
 * If you're using Heroku, make sure to remove the Pusher add-on, otherwise
   your configuration will more than likely be overwritten by the add-on
   when you deploy to production.
