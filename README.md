@@ -7,12 +7,20 @@ Powered by [now.js](http://nowjs.com) on top of [node.js](http://nodejs.org)
 
 Application Server
 ------------------
-There are two environment variables that need to be set:
+###Configuration Variables
 
-* `SECRET` - the token that will be used to validate your requests
-* `REDIRECT_URL` - the url that GET requests will be redirected to
-* `SOCKETS_OFF` true (default) | false - turn off websockets as a
-  transport option
+* `REDIRECT_URL` - When this is set, all non-nowjs GET requests will be
+  redirected to the specified URL
+* `USE_SOCKETS` true(default)|false - Disables websockets when set to
+  `false`. This is useful when deploying to platforms that decline to
+  support sockets, such as Heroku
+
+###Credentials
+Credentials are set through environmental variables using the following
+format: `CRED_APPID_KEY=SECRET`  
+For instance, an API credential for app `1234` with key `asdfjkl` and
+secret `qwerty` would look like this: `CRED_1234_asdfjkl_qwerty`  
+You can set as many credentials as you like.
 
 Client API
 ----------
@@ -44,9 +52,9 @@ just follow these simple steps:
 Deploying to Heroku
 -----------------
 Heroku doesn't allow websockets at the moment so [deploying will require
-opting out of that connection option](https://twitter.com/#!/NowJsTeam/status/115861105032708096) by setting SOCKETS_OFF to true:
+opting out of that connection option](https://twitter.com/#!/NowJsTeam/status/115861105032708096) by setting USE_SOCKETS to false:
 
-`heroku config:add SOCKETS_OFF=true`
+`heroku config:add USE_SOCKETS=false`
 
 * Create your Heroku app `heroku create --stack cedar`
 * Setup your NODE_ENV variable for Express `heroku config:add NODE_ENV=production`
