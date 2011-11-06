@@ -40,30 +40,26 @@ immediately on page load needs this wrapper.
 Publisher APIs
 --------------
 ###Ruby Gem
-RMSN works with the standard [Pusher Gem](https://github.com/pusher/pusher-gem),
-just follow these simple steps:
-
-* Install the gem using `gem install pusher` or add it to your `Gemfile`
-  with `gem 'pusher'`
-* Configure the gem with the [URL method](https://github.com/pusher/pusher-gem/blob/master/lib/pusher.rb#L50)
-  using this URL scheme:
+RMSN works with the standard [Pusher Gem](https://github.com/pusher/pusher-gem).
+Simply install it as you would normally but when configuring, use the [URL
+method](https://github.com/pusher/pusher-gem/blob/master/lib/pusher.rb#L50)
+with this scheme:
 
     http://KEY:SECRET@example.com/apps/APP_ID
 
-  An example configuration in `config/environments/development.rb` of a
-  Rails application might look like this:
+An example configuration in `config/environments/development.rb` of a
+Rails application might look like this:
 
-    Pusher.url = 'http://123qweasd1123qweasd1:098poilkj0098poilkj0@rmsn.example.com/apps/1234'
+    Pusher.url = 'http://123qweasd1:098poilkj0@rmsn.example.com/apps/1234'
 
-* If you're using Heroku, make sure to remove the Pusher add-on, otherwise
-  your configuration will more than likely be overwritten by the add-on
-  when you deploy to production.
+If you're using Heroku, make sure to remove the Pusher add-on, otherwise
+your configuration will more than likely be overwritten upon deployment.
 
 Deploying to Heroku
------------------
+-------------------
 
 * Create your Heroku app `heroku create --stack cedar`
-* [Disable sockets](https://twitter.com/#!/NowJsTeam/status/115861105032708096) `heroku config:add USE_SOCKETS=false`
+* [Disable sockets](https://twitter.com/#!/NowJsTeam/status/115861105032708096) by adding `heroku config:add USE_SOCKETS=false`
 * Setup your NODE_ENV variable for Express `heroku config:add NODE_ENV=production`
 * Add a credential, ex. `heroku config:add CRED_1234_asdfjkl=qwerty`
   (explained in **Credentials** above)
