@@ -18,29 +18,33 @@ now.ready(function(){
     self = this;
     now.rmsn = {
       connection: {
+        key: self.key,
         emit: function(event_name, data){ self.connection.emit(event_name, data); }
       }
     };
   };
 
   RMSN.prototype.subscribe = function(channel_name){
-    now.RMSN.subscribe(channel_name);
-    var self = this;
     var channel = this.channels.add(channel_name, this);
-    self.send_event('pusher:subscribe', {
-      channel: channel_name,
-      auth: false, //data.auth,
-      channel_data: false //data.channel_data
-    });
+    if(now.RMSN.subscribe(channel_name)){
+      this.send_event('pusher:subscribe', {
+        channel: channel_name,
+        auth: false, //data.auth,
+        channel_data: false //data.channel_data
+      });
+    } else {
+      channel.emit('subscription_error', 'Unable to subscribe to channel: '+channel_name);
+    }
     return channel;
   };
 
   RMSN.prototype.unsubscribe = function(channel_name){
-    now.RMSN.unsubscribe(channel_name);
     this.channels.remove(channel_name);
-    this.send_event('pusher:unsubscribe', {
-      channel: channel_name
-    });
+    if(now.RMSN.unsubscribe(channel_name)){
+      this.send_event('pusher:unsubscribe', {
+        channel: channel_name
+      });
+    }
   };
 
 });

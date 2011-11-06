@@ -20,7 +20,8 @@ Pusher.log = function(message){ if(window.console && window.console.log) window.
 WEB_SOCKET_DEBUG = true;
 
 now.ready(function(){
-  var pusher    = new Pusher('dummy_key_here'),
+  var config    = {app_id:1234, key:'abcd1234efghi5678'},
+      pusher    = new Pusher(config.key),
       channels  = ['channel_one','channel_two','channel_three'], channel,
       events    = ['event_one','event_two','event_three'],
       $channels = $('#channels'),
@@ -42,7 +43,7 @@ now.ready(function(){
   });
 
   $("#send-button").click(function(){
-    $.post('/apps/1234/channels/'+$channels.val()+'/events', {
+    $.post('/apps/'+config.app_id+'/channels/'+$channels.val()+'/events', {
       event_name: $events.val(),
       data: $('#data').val()
     });

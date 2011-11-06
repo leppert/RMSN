@@ -40,12 +40,26 @@ var everyone = (config.use_sockets)
 
 everyone.now.RMSN = {
   subscribe: function(channel_name){
-    nowjs.getGroup(channel_name).addUser(this.user.clientId);
-    console.log('User added to channel', this.user.clientId, channel_name);
+    var creds = get_creds(this.now.rmsn.connection.key);
+    if(creds.app_id){
+      nowjs.getGroup(creds.app_id+'_'+channel_name).addUser(this.user.clientId);
+      console.log('User added to channel', this.user.clientId, channel_name);
+      return true;
+    } else {
+      console.log('Invalid API key');
+      return false;
+    }
   },
   unsubscribe: function(channel_name){
-    nowjs.getGroup(channel_name).removeUser(this.user.clientId);
-    console.log('User removed from channel', this.user.clientId, channel_name);
+    var creds = get_creds(this.now.rmsn.connection.key);
+    if(creds.app_id){
+      nowjs.getGroup(creds.app_id+'_'+channel_name).removeUser(this.user.clientId);
+      console.log('User removed from channel', this.user.clientId, channel_name);
+      return true;
+    } else {
+      console.log('Invalid API key');
+      return false;
+    }
   }
 };
 
@@ -73,6 +87,6 @@ app.post('/apps/:app_id/channels/:channel_name/events', function(req, res){
         return new Signature.Token(key, get_creds(key).secret);
       });
   // TODO - account for no one connected
-  nowjs.getGroup(req.params.channel_name).now.rmsn.connection.emit('message', {'event':req.query.name, 'data':req.body, 'channel':req.params.channel_name});
+  nowjs.getGroup(req.params.app_id+'_'+req.params.channel_name).now.rmsn.connection.emit('message', {'event':req.query.name, 'data':req.body, 'channel':req.params.channel_name});
   res.send('true');
 });
