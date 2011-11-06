@@ -99,6 +99,3 @@ app.post('/apps/:app_id/channels/:channel_name/events', function(req, res){
     .now.rmsn.connection.emit('message', {'event':req.query.name, 'data':req.body, 'channel':req.params.channel_name});
   res.send('true');
 });
-app.post('/test_post', function(req, res){
-
-});
