@@ -45,8 +45,10 @@ now.ready(function(){
   $('#creds').text('KEY_'+config.key+'='+config.app_id+':'+config.secret);
 
   $("#send-button").click(function(){
-    $.post('/apps/'+config.app_id+'/channels/'+$channels.val()+'/events', {
-      event_name: $events.val(),
+    $.get('/', {
+      app_id: config.app_id,
+      channel_name: $channels.val(),
+      name: $events.val(),
       data: $('#data').val()
     });
     $(':text').val('');
@@ -58,10 +60,14 @@ now.ready(function(){
   <h1>RMSN</h1>
   <h2><a href="https://github.com/leppert/RMSN">Reading Message Server</a> Test Page</h2>
   <h5>For this demo to work, you'll need to add this variable to your environment:<br><code id="creds"></code></h5>
+  <h5>
+    Once you're done testing, it's highly recommended that you add <code>REDIRECT_URL</code> to your environment.<br>
+    Doing so will prevent this page from falling into the wrong hands.
+  </h5>
   <form>
     <select id="channels"></select>
     <select id="events"></select>
-    <input type="text" id="data" placeholder='data'>
+    <input type="text" id="data" placeholder='{"json":data}'>
     <input type="button" value="Send" id="send-button">
   </form>
   <div id="results"></div>

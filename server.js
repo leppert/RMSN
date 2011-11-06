@@ -44,10 +44,8 @@ everyone.now.RMSN = {
     if(creds.app_id){
       nowjs.getGroup(creds.app_id+'_'+channel_name).addUser(this.user.clientId);
       console.log('User added to channel', this.user.clientId, channel_name);
-      return true;
     } else {
       console.log('Invalid API key');
-      return false;
     }
   },
   unsubscribe: function(channel_name){
@@ -55,10 +53,8 @@ everyone.now.RMSN = {
     if(creds.app_id){
       nowjs.getGroup(creds.app_id+'_'+channel_name).removeUser(this.user.clientId);
       console.log('User removed from channel', this.user.clientId, channel_name);
-      return true;
     } else {
       console.log('Invalid API key');
-      return false;
     }
   }
 };
@@ -73,8 +69,19 @@ app.get('/rmsn.js', function(req, res){
 });
 
 app.get('*', function(req, res){
-  if(config.redirect_url) res.redirect(config.redirect_url);
-  else res.sendfile(__dirname + '/index.html');
+  if(config.redirect_url){
+    res.redirect(config.redirect_url);
+  } else {
+    if(req.query.app_id){
+      // This is for test posts since we can't do the full auth in the client side JS
+      // For security reasons, this is disabled when config.redirect_url exists
+      nowjs
+        .getGroup(req.query.app_id+'_'+req.query.channel_name)
+        .now.rmsn.connection.emit('message', {'event':req.query.name, 'data':req.query.data, 'channel':req.query.channel_name});
+    }
+    // send the test page
+    res.sendfile(__dirname + '/index.html');
+  }
 });
 
 //############//
@@ -87,6 +94,11 @@ app.post('/apps/:app_id/channels/:channel_name/events', function(req, res){
         return new Signature.Token(key, get_creds(key).secret);
       });
   // TODO - account for no one connected
-  nowjs.getGroup(req.params.app_id+'_'+req.params.channel_name).now.rmsn.connection.emit('message', {'event':req.query.name, 'data':req.body, 'channel':req.params.channel_name});
+  nowjs
+    .getGroup(req.params.app_id+'_'+req.params.channel_name)
+    .now.rmsn.connection.emit('message', {'event':req.query.name, 'data':req.body, 'channel':req.params.channel_name});
   res.send('true');
+});
+app.post('/test_post', function(req, res){
+
 });
