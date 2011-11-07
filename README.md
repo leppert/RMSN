@@ -43,7 +43,7 @@ existing code will work as-is.
 
 ####A note about now.ready();
 It's important to note that you'll probably need to wrap your code with
-`now.ready();`, much as you would with jQuery's `$(document).ready()`.
+`now.ready()`, much as you would with jQuery's `$(document).ready()`.
 If you're seeing errors like `Object has no method 'subscribe'`,
 it's because your code is being executed before nowjs has fully loaded.
 Only code that accesses RMSN immediately on page load needs this wrapper
