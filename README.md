@@ -28,8 +28,8 @@ secret `qwerty` would look like this:
 
 You can set as many credentials as you like. Go wild.
 
-Client API
-----------
+Client Libraries
+----------------
 ###Javascript
 To include RMSN in your client side app, just add these three lines to
 the `<head>` of your HTML, replacing `rmsn.example.com` with your RMSN server:
@@ -70,8 +70,8 @@ that aren't yet supported, marked with ~~strikethroughs~~.
 
 Don't see your feature supported? Send a pull request!
 
-Publisher APIs
---------------
+Publisher Libraries
+-------------------
 ###Ruby Gem
 RMSN works with the standard [Pusher Gem](https://github.com/pusher/pusher-gem).
 Simply install it as you would normally but when configuring, use the [URL
