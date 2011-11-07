@@ -49,6 +49,27 @@ it's because your code is being executed before nowjs has fully loaded.
 Only code that accesses RMSN immediately on page load needs this wrapper
 and `index.html` contains a good example.
 
+###Support
+RMSN is a work in progress. As such, there are bits of the Pusher API
+that aren't yet supported, marked with ~~strikethroughs~~.
+
+* Connection
+** Connecting
+** ~~Disconnecting~~
+** ~~Connection States~~
+* Channels
+** Public Channels
+** ~~Private Channels~~
+** ~~Presence Channels~~
+* Events (limited support)
+* ~~Presence Events~~
+* Global config
+** ~~Pusher.host~~
+** ~~Pusher.channel_auth_endpoint~~
+** Pusher.log
+
+Don't see your feature supported? Send a pull request!
+
 Publisher APIs
 --------------
 ###Ruby Gem
