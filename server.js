@@ -11,7 +11,7 @@ var config = {
   use_sockets:  process.env.USE_SOCKETS !== 'false'
 };
 // make sure the redirect URL is a full URL with http://
-if(config.redirect_url && redirect_url.substring(0,4).toLowerCase() != 'http'){
+if(config.redirect_url && config.redirect_url.substring(0,4).toLowerCase() != 'http'){
   config.redirect_url = 'http://'+config.redirect_url;
 }
 console.log('config', config);
