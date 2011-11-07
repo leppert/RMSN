@@ -54,19 +54,19 @@ RMSN is a work in progress. As such, there are bits of the Pusher API
 that aren't yet supported, marked with ~~strikethroughs~~.
 
 * Connection
-** Connecting
-** ~~Disconnecting~~
-** ~~Connection States~~
+    * Connecting
+    * ~~Disconnecting~~
+    * ~~Connection States~~
 * Channels
-** Public Channels
-** ~~Private Channels~~
-** ~~Presence Channels~~
+    * Public Channels
+    * ~~Private Channels~~
+    * ~~Presence Channels~~
 * Events (limited support)
 * ~~Presence Events~~
 * Global config
-** ~~Pusher.host~~
-** ~~Pusher.channel_auth_endpoint~~
-** Pusher.log
+    * ~~Pusher.host~~
+    * ~~Pusher.channel_auth_endpoint~~
+    * Pusher.log
 
 Don't see your feature supported? Send a pull request!
 
