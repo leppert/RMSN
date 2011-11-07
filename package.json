@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "express": "2.2.0",
-    "now": ">= 0.7.5"
+    "now": ">= 0.7.5",
+    "signature": "git://github.com/leppert/signature.git"
   }
 }
