@@ -24,18 +24,30 @@ format:
 For instance, an API credential for app `1234` with key `asdfjkl` and
 secret `qwerty` would look like this:
 
-    KEY_asdfjkl=1234:qwerty
+    KEY_killerrandomkey=1234:supersecretphrase
 
 You can set as many credentials as you like. Go wild.
 
 Client API
 ----------
-###now.ready();
-It's important to note that you'll probably need to wrap your code in a
-`now.ready(function(){});` function call. If you're seeing errors like
-`Object has no method 'subscribe'` it's because your code is being executed
-before nowjs has had a chance to load. Only code that accesses RMSN
-immediately on page load needs this wrapper.
+###Javascript
+To include RMSN in your client side app, just add these three lines to
+the `<head>` of your HTML, replacing `rmsn.example.com` with your RMSN server:
+
+    <script src="rmsn.example.com/nowjs/now.js"></script>
+    <script src="http://js.pusherapp.com/1.9/pusher.min.js"></script>
+    <script src="rmsn.example.com/rmsn.js"></script>
+
+RMSN piggybacks on the Pusher JS library so most, if not all, of your
+existing code will work as-is.
+
+####A note about now.ready();
+It's important to note that you'll probably need to wrap your code with
+`now.ready();`, much as you would with jQuery's `$(document).ready()`.
+If you're seeing errors like `Object has no method 'subscribe'`,
+it's because your code is being executed before nowjs has fully loaded.
+Only code that accesses RMSN immediately on page load needs this wrapper
+and `index.html` contains a good example.
 
 Publisher APIs
 --------------
@@ -45,12 +57,12 @@ Simply install it as you would normally but when configuring, use the [URL
 method](https://github.com/pusher/pusher-gem/blob/master/lib/pusher.rb#L50)
 with this scheme:
 
-    http://KEY:SECRET@example.com/apps/APP_ID
+    http://KEY:SECRET@rmsn.example.com/apps/APP_ID
 
 An example configuration in `config/environments/development.rb` of a
 Rails application might look like this:
 
-    Pusher.url = 'http://123qweasd1:098poilkj0@rmsn.example.com/apps/1234'
+    Pusher.url = 'http://killerrandomkey:supersecretphrase@rmsn.example.com/apps/1234'
 
 If you're using Heroku, make sure to remove the Pusher add-on, otherwise
 your configuration will more than likely be overwritten upon deployment.
@@ -61,7 +73,7 @@ Deploying to Heroku
 * Create your Heroku app `heroku create --stack cedar`
 * [Disable sockets](https://twitter.com/#!/NowJsTeam/status/115861105032708096) by adding `heroku config:add USE_SOCKETS=false`
 * Setup your NODE_ENV variable for Express `heroku config:add NODE_ENV=production`
-* Add a credential, ex. `heroku config:add KEY_asdfjkl=1234:qwerty`
+* Add a credential, ex. `heroku config:add KEY_killerrandomkey=1234:supersecretphrase`
   (explained in **Credentials** above)
 * Push the code to master `git push heroku master`
 
