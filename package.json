@@ -10,6 +10,6 @@
   "dependencies": {
     "express": "2.2.0",
     "now": ">= 0.7.5",
-    "signature": "0.0.1"
+    "signature": ">= 0.0.2"
   }
 }
