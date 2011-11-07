@@ -34,9 +34,9 @@ Client API
 To include RMSN in your client side app, just add these three lines to
 the `<head>` of your HTML, replacing `rmsn.example.com` with your RMSN server:
 
-    <script src="rmsn.example.com/nowjs/now.js"></script>
+    <script src="http://rmsn.example.com/nowjs/now.js"></script>
     <script src="http://js.pusherapp.com/1.9/pusher.min.js"></script>
-    <script src="rmsn.example.com/rmsn.js"></script>
+    <script src="http://rmsn.example.com/rmsn.js"></script>
 
 RMSN piggybacks on the Pusher JS library so most, if not all, of your
 existing code will work as-is.
