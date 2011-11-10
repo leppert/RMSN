@@ -8,6 +8,9 @@ and [Express](http://expressjs.com).
 
 Application Server
 ------------------
+This is the core of RMSN, or rather RMSN itself. It's guided, very
+simply, by a few config variables and some credentials.
+
 ###Configuration Variables
 
 * `REDIRECT_URL` - When this is set, all non-nowjs GET requests will be
