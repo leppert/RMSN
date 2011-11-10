@@ -1,6 +1,6 @@
 Reading Message Server (RMSN)
 =============================
-Built for and currently powering [Reading.am](http://reading.am).
+Built for [Reading.am](http://reading.am).
 Intended as a drop-in replacement for [Pusher](http://pusher.com),
 specifically on [Heroku](http://www.heroku.com) but generally anywhere.
 Kept afloat by [now.js](http://nowjs.com) on top of [node.js](http://nodejs.org).
@@ -72,10 +72,13 @@ Don't see your feature supported? Send a pull request!
 
 Publisher Libraries
 -------------------
-###Ruby Gem
-RMSN works with the standard [Pusher Gem](https://github.com/pusher/pusher-gem).
-Simply install it as you would normally but when configuring, use the [URL
-method](https://github.com/pusher/pusher-gem/blob/master/lib/pusher.rb#L50)
+RMSN works with most of the standard [Pusher publisher libraries](http://pusher.com/docs/rest_libraries).
+Simply specify your RMSN server in place of the Pusher's `api.pusherapp.com`
+and the rest should take care of itself. Library specific are details below
+with `rmsn.example.com` as an example RMSN server endpoint. You knew that.
+
+###[Ruby](https://github.com/pusher/pusher-gem)
+Config that Ruby gem using the [URL method](https://github.com/pusher/pusher-gem/blob/master/lib/pusher.rb#L50)
 with this scheme:
 
     http://KEY:SECRET@rmsn.example.com/apps/APP_ID
@@ -87,6 +90,11 @@ Rails application might look like this:
 
 If you're using Heroku, make sure to remove the Pusher add-on, otherwise
 your configuration will more than likely be overwritten upon deployment.
+
+###[PHP](https://github.com/squeeks/Pusher-PHP)
+Specify your host like so:
+
+    $pusher = new Pusher($key, $secret, $app_id, $debug, 'http://rmsn.example.com');
 
 Deploying to Heroku
 -------------------
