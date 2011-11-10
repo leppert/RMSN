@@ -104,6 +104,7 @@ Create your Heroku app on a Cedar stack
     heroku create --stack cedar
 
 [Disable sockets](https://twitter.com/#!/NowJsTeam/status/115861105032708096)
+since Heroku doesn't support them
 
     heroku config:add USE_SOCKETS=false
 
