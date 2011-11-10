@@ -3,7 +3,8 @@ Reading Message Server (RMSN)
 Built for [Reading.am](http://reading.am).
 Intended as a drop-in replacement for [Pusher](http://pusher.com),
 specifically on [Heroku](http://www.heroku.com) but generally anywhere.
-Kept afloat by [now.js](http://nowjs.com) on top of [node.js](http://nodejs.org).
+Kept afloat by [now.js](http://nowjs.com) on top of [node.js](http://nodejs.org)
+and [Express](http://expressjs.com).
 
 Application Server
 ------------------
@@ -78,8 +79,7 @@ and the rest should take care of itself. Library specific are details below
 with `rmsn.example.com` as an example RMSN server endpoint. You knew that.
 
 ###[Ruby](https://github.com/pusher/pusher-gem)
-Config that Ruby gem using the [URL method](https://github.com/pusher/pusher-gem/blob/master/lib/pusher.rb#L50)
-with this scheme:
+Configure the Ruby gem using the [URL method](https://github.com/pusher/pusher-gem/blob/master/lib/pusher.rb#L50):
 
     http://KEY:SECRET@rmsn.example.com/apps/APP_ID
 
@@ -99,12 +99,25 @@ Specify your host like so:
 Deploying to Heroku
 -------------------
 
-* Create your Heroku app `heroku create --stack cedar`
-* [Disable sockets](https://twitter.com/#!/NowJsTeam/status/115861105032708096) by adding `heroku config:add USE_SOCKETS=false`
-* Setup your NODE_ENV variable for Express `heroku config:add NODE_ENV=production`
-* Add a credential, ex. `heroku config:add KEY_killerrandomkey=1234:supersecretphrase`
-  (explained in **Credentials** above)
-* Push the code to master `git push heroku master`
+Create your Heroku app on a Cedar stack
+
+    heroku create --stack cedar
+
+[Disable sockets](https://twitter.com/#!/NowJsTeam/status/115861105032708096)
+
+    heroku config:add USE_SOCKETS=false
+
+Set the `NODE_ENV` variable, needed by Express
+
+  heroku config:add NODE_ENV=production
+
+Add a credential as explained in **Credentials** above
+
+    heroku config:add KEY_killerrandomkey=1234:supersecretphrase
+
+Push the code to Heroku
+
+    git push heroku master
 
 Additional instructions for running Node.js applications on Heroku can
 be [found here](http://devcenter.heroku.com/articles/node-js).
