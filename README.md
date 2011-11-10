@@ -109,7 +109,7 @@ Create your Heroku app on a Cedar stack
 
 Set the `NODE_ENV` variable, needed by Express
 
-  heroku config:add NODE_ENV=production
+    heroku config:add NODE_ENV=production
 
 Add a credential as explained in **Credentials** above
 
