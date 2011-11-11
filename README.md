@@ -25,8 +25,8 @@ format:
 
     KEY_{KEY}={APP_ID}:{SECRET}
 
-For instance, an API credential for app `1234` with key `asdfjkl` and
-secret `qwerty` would look like this:
+For instance, an API credential for app `1234` with key `killerrandomkey` and
+secret `supersecretphrase` would look like this:
 
     KEY_killerrandomkey=1234:supersecretphrase
 
