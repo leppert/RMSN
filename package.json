@@ -1,8 +1,8 @@
 {
   "author": "Greg Leppert",
-  "name": "RMNS",
+  "name": "RMSN",
   "version": "0.0.1",
-  "description": "RMNS: A drop-in replacement for Pusher",
+  "description": "RMSN: A drop-in replacement for Pusher",
   "repository": {
     "type": "git",
     "url": "git://github.com/leppert/RMSN.git"
